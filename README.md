@@ -1,8 +1,8 @@
-# Vue 版本构建的PC版本博客
+<!-- # Vue 版本构建的PC版本博客
 [![Build Status](https://travis-ci.org/hellomrbigshot/blog-frontend.svg?branch=master)](https://travis-ci.org/hellomrbigshot/blog-frontend)
 
 
-> A Vue.js project
+> A Vue.js project -->
 
 
 ## Build Setup
@@ -21,7 +21,7 @@ npm run build
 npm run build --report
 ```
 
-### 博客地址
+<!-- ### 博客地址
 [点击查看博客](http://vue.hellomrbigbigshot.xyz)
 <br />
 ### 博客移动版
@@ -35,4 +35,4 @@ npm run build --report
 ![image](https://i.loli.net/2019/01/21/5c449f050e159.jpg)
 
 ### 后端为 nodejs 构建
-[点击跳转到后端项目](https://github.com/hellomrbigshot/blog-pwa/tree/master/server)
+[点击跳转到后端项目](https://github.com/hellomrbigshot/blog-pwa/tree/master/server) -->
