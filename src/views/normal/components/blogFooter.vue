@@ -1,33 +1,28 @@
 <template>
   <div>
-    <p>Created By Yeachan <a
-        class="github-link"
-        href="https://github.com/hellomrbigshot/VueExpressBlog"
-      >
-        <Icon
-          type="logo-github"
-          :size="20"
-        ></Icon>
-      </a></p>
-    <p>由 <a
-        class="footer-link"
-        href="https://cn.vuejs.org/"
-      >Vue.js</a> 和 <a
-        class="footer-link"
-        href="https://www.iviewui.com/"
-      >iView</a> 强力驱动</p>
+    <p>
+      Created By LJL
+      <a class="github-link" href="https://github.com/shiki0083">
+        <Icon type="logo-github" :size="20"></Icon>
+      </a>
+    </p>
+    <p>
+      由
+      <a class="footer-link" href="https://cn.vuejs.org/">Vue.js</a> 和
+      <a class="footer-link" href="https://www.iviewui.com/">iView</a> 强力驱动
+    </p>
     <p :style="{textAlign: 'left', fontSize: '12px'}">备案号：{{ ICP }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      ICP: '浙ICP备18011593号-1'
-    }
+      ICP: "浙ICP备20000201号"
+    };
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 p {
