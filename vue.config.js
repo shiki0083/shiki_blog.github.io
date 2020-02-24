@@ -3,7 +3,7 @@ module.exports = {
 	devServer: {
 		proxy: {
 			// '/api': {
-			//   target: 'https://hellomrbigbigshot.xyz',
+			//   target: '',
 			//   changeOrigin: true
 			// }
 			// '/api': {

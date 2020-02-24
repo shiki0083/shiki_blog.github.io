@@ -29,6 +29,7 @@
         <el-button type="primary" @click="save('normal')">发布</el-button>
       </el-form-item>
     </el-form>
+
     <Modal v-model="tagModal" title="创建标签">
       <Form ref="tagForm" :model="tag_obj" :rules="tagRule">
         <FormItem prop="name">
@@ -48,6 +49,8 @@
 
 <script>
 import MEditor from "simple-m-editor";
+import axios from "axios";
+
 export default {
   components: {
     MarkdownEditor: MEditor
@@ -107,8 +110,8 @@ export default {
       }
     };
   },
-  async mounted() {
-    await this.getAllTags();
+  mounted() {
+    this.getAllTags();
     this.getPageDetail();
   },
   beforeRouteLeave(to, from, next) {
@@ -160,12 +163,21 @@ export default {
     createTagSubmit() {
       this.$refs["tagForm"].validate(valid => {
         if (valid) {
-          this.Common.axios("/api/tag/create", this.tag_obj).then(async res => {
+          axios.post("/api/v1/createVideo", this.tag_obj).then(async res => {
             this.tagModal = false;
             await this.getAllTags();
             this.pageObject.tags.push(this.tag_obj.name);
             this.$refs["tagForm"].resetFields();
           });
+
+          // this.Common.axios("/api/v1/createVideo", this.tag_obj).then(
+          //   async res => {
+          //     this.tagModal = false;
+          //     await this.getAllTags();
+          //     this.pageObject.tags.push(this.tag_obj.name);
+          //     this.$refs["tagForm"].resetFields();
+          //   }
+          // );
         }
       });
     },

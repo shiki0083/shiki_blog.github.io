@@ -21,13 +21,6 @@
               <router-link :to="{name: route.name}">{{ route.meta.title }}</router-link>
             </li>
           </template>
-          <!-- <li class="menu-item">
-            <a href="https://hellomrbigbigshot.xyz">
-              <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-React"></use>
-              </svg> 版本
-            </a>
-          </li>-->
         </ul>
         <div :class="['site-search', {'active': isFocus}]">
           <div class="site-search-form">

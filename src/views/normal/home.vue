@@ -72,7 +72,7 @@ export default {
   data () {
     return {
       isCollapsed: true,
-      // socket: io(`${process.env.NODE_ENV === 'development' ? 'http://192.168.10.107:8080' : 'https://hellomrbigbigshot.xyz'}`),
+      // socket: io(`${process.env.NODE_ENV === 'development' ? 'http://192.168.10.107:8080' : ''}`),
       unreadMsgNum: 0
     }
   },

@@ -23,27 +23,27 @@ export const router = new VueRouter(RouterConfig);
 router.beforeEach((to, from, next) => {
 	iView.LoadingBar.start();
 	next();
-	// if (to.name === 'normalGuestBook') {
-	//   iView.Notice.destroy()
-	// }
-	// if (!Cookies.get('user') && to.name !== 'login' && to.meta.login) {
-	//   next({
-	//     name: 'login',
-	//     query: { redirect: router.currentRoute.fullPath }
-	//   })
-	// } else if (Cookies.get('user') && to.name === 'login') {
-	//   if (Cookies.get('user') === 'admin') {
-	//     next({
-	//       name: 'admin'
-	//     })
-	//   } else {
-	//     next({
-	//       name: 'normal'
-	//     })
-	//   }
-	// } else {
-	//   next()
-	// }
+	if (to.name === 'normalGuestBook') {
+	  iView.Notice.destroy()
+	}
+	if (!Cookies.get('user') && to.name !== 'login' && to.meta.login) {
+	  next({
+	    name: 'login',
+	    query: { redirect: router.currentRoute.fullPath }
+	  })
+	} else if (Cookies.get('user') && to.name === 'login') {
+	  if (Cookies.get('user') === 'admin') {
+	    next({
+	      name: 'admin'
+	    })
+	  } else {
+	    next({
+	      name: 'normal'
+	    })
+	  }
+	} else {
+	  next()
+	}
 });
 
 router.afterEach((to, from, next) => {

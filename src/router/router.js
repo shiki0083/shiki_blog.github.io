@@ -234,7 +234,7 @@ export const normalRouter = {
 		{
 			name: 'normalNew',
 			component: () => import('@/views/normal/newPage'),
-			path: 'new',
+			path: 'newPage',
 			meta: {
 				login: true,
 				title: '写文章',

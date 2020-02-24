@@ -98,7 +98,7 @@ const request = (url, formData = {}, headers = {}) => {
     url,
     data: Qs.stringify(formData),
     headers,
-    method: 'get'
+    method: 'POST'
   }).then(res => {
     return res
   }).catch(e  => {
