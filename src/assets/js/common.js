@@ -37,7 +37,6 @@ axios.interceptors.response.use(
       clearTimeout(timer)
       timer = null
     }
-    // console.log(loadingArr.length)
     if (!loadingArr.length) {
       if (Message) Message.destroy()
     }
@@ -55,7 +54,6 @@ axios.interceptors.response.use(
       clearTimeout(timer)
       timer = null
     }
-    // console.log(loadingArr.length)
     if (!loadingArr.length) {
       if (Message) Message.destroy()
     }

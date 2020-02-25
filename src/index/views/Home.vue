@@ -1,76 +1,44 @@
 <template>
   <div class="layout">
-    <BackTop/>
-    <BlogHeader
-      v-if="!$route.meta.hideHeader"
-      @on-change="handleRouter"
-    />
+    <BackTop />
+    <BlogHeader v-if="!$route.meta.hideHeader" @on-change="handleRouter" />
     <keep-alive>
-      <router-view
-        class="blog-content"
-        :key="$route.fullPath"
-      />
+      <router-view class="blog-content" :key="$route.fullPath" />
     </keep-alive>
-    <BlogFooter v-if="!$route.meta.hideFooter"/>
+    <BlogFooter v-if="!$route.meta.hideFooter" />
   </div>
 </template>
 <script>
-// import io from 'socket.io-client'
 export default {
   components: {
-    BlogHeader: () => import('index/components/BlogHeader'),
-    BlogFooter: () => import('index/components/BlogFooter')
-    // siderUserInfo: () => import('index/components/SiderUserInfo')
+    BlogHeader: () => import("index/components/BlogHeader"),
+    BlogFooter: () => import("index/components/BlogFooter")
   },
-  data () {
+  data() {
     return {
       isCollapsed: true,
-      // socket: io(`${process.env.NODE_ENV === 'development' ? 'http://localhost:8082' : 'https://hellomrbigbigshot.xyz'}`),
       unreadMsgNum: 0
-    }
+    };
   },
-  async created () {
-    this.isCollapsed = !this.user
-    // this.socket.on('unread-comment', msg => {
-    //   if (msg > 0 && msg !== this.unreadMsgNum && this.$route.name !== 'normalGuestBook') {
-    //     this.unreadMsgNum = msg
-    //     this.$Notice.destroy()
-    //     this.$Notice.info({
-    //       title: '提示',
-    //       render: h => {
-    //         return h('div', [
-    //           h('span', '你有'),
-    //           h('a', {
-    //             on: {
-    //               click: () => {
-    //                 this.$router.push({ name: 'normalGuestBook' })
-    //               }
-    //             }
-    //           }, `${msg}`),
-    //           h('span', '条未读信息')
-    //         ])
-    //       },
-    //       duration: 0
-    //     })
-    //   }
-    // })
+  async created() {
+    this.isCollapsed = !this.user;
   },
   computed: {
-    user () {
-      return this.Cookies.get('user') || this.$route.query.username || ''
+    user() {
+      return this.Cookies.get("user") || this.$route.query.username || "";
     }
   },
   methods: {
-    collapsedSider () {
+    collapsedSider() {
       // 侧边栏显示切换
-      this.$refs.pageSider.toggleCollapse()
+      this.$refs.pageSider.toggleCollapse();
     },
-    handleRouter (name) {
+    handleRouter(name) {
       // 路由跳转
-      this.$router.push({ name: name })
+      this.$router.push({ name: name });
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .icon-wrapper {
@@ -118,29 +86,39 @@ export default {
   margin: 80px auto 0;
   padding-top: 50px;
   min-height: calc(100vh - 160px);
+
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 160px);
 }
-@media (max-width: 991px) {
-  .home-sider,
-  .icon-wrapper {
-    display: none;
-  }
-}
-@media (max-width: 767px) {
-  .blog-content {
-    margin: 20px 20px;
-    width: auto;
-  }
-}
-@media (max-width: 1600px) {
-  .blog-content {
-    width: 85%;
-    max-width: 700px;
-  }
-}
-@media (min-width: 1600px) {
-  .blog-content {
-    // margin: 20px 20px;
-    width: 1000px;
-  }
-}
+// @media (max-width: 991px) {
+//   .home-sider,
+//   .icon-wrapper {
+//     display: none;
+//   }
+// }
+// @media (max-width: 767px) {
+//   .blog-content {
+//     margin: 20px 20px;
+//     width: auto;
+//   }
+// }
+// @media (max-width: 1600px) {
+//   .blog-content {
+//     width: 85%;
+//     max-width: 700px;
+//   }
+// }
+// @media (min-width: 1600px) {
+//   .blog-content {
+//     // margin: 20px 20px;
+//     padding-top: 50px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     min-height: calc(100vh - 160px);
+//   }
+// }
 </style>

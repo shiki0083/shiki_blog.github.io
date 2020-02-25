@@ -1,36 +1,29 @@
 <template>
   <div class="blog-footer">
     <div class="blog-footer-content">
-      <p>Created By Yeachan
-        <a
-          class="github-link"
-          href="https://github.com/hellomrbigshot/VueExpressBlog"
-        >
-          <Icon
-            type="logo-github"
-            :size="20"
-          />
+      <p>
+        Created By LJL
+        <a class="github-link" href="https://github.com/shiki0083/shiki_blog">
+          <Icon type="logo-github" :size="20" />
         </a>
       </p>
-      <p>由
-        <a
-          class="footer-link"
-          href="https://cn.vuejs.org/"
-        >Vue.js</a>
-      强力驱动</p>
-      <p :style="{textAlign: 'left', fontSize: '12px'}">备案号：{{ ICP }}</p>
+      <p>
+        由
+        <a class="footer-link" href="https://cn.vuejs.org/">Vue.js</a>
+        强力驱动
+      </p>
+      <p :style="{textAlign: 'left', fontSize: '12px'}">备案号：浙ICP备20000201号</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      ICP: '浙ICP备18011593号-1'
-    }
+    };
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .blog-footer {

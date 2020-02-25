@@ -45,7 +45,7 @@
     .site-nav {
         overflow: hidden;
         height: 36px;
-        width: 60%;
+        // width: 60%;
         display: flex;
 
         ul.menu {
@@ -227,7 +227,4 @@
 }
 
 @media (min-width: 1600px) {
-    .header-inner {
-        width: 900px;
-    }
 }

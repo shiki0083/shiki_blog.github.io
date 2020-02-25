@@ -84,18 +84,8 @@
 export default {
   name: 'Login',
   components: {
-    // mForm: () => import('@/components/mUi/src/components/form/form'),
-    // mFormItem: () => import('@/components/mUi/src/components/form/form-item'),
-    // mInput: () => import('@/components/mUi/src/components/Input/input')
   },
   data () {
-    // const validatorPass = (rule, value, callback) => {
-    //   if (!value) {
-    //     callback(new Error('请输入密码'))
-    //     return false
-    //   }
-    //   callback()
-    // }
     return {
       formData: {
         username: '',
