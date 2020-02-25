@@ -147,11 +147,8 @@ export const page404 = {
 	component: () => import('@/views/ErrorPage/404')
 };
 export const routers = [
-	// 上面定义的路由均写在 routers
 	longinRouter,
-	// page404,
 	registerRouter,
 	oauthRegisterRouter,
-	// redirect,
 	routes
 ];
