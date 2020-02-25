@@ -7,10 +7,11 @@
       >
         <span class="logo-line-before"/>
         <span class="site-title">
-          <img
+          Shiki
+          <!-- <img
             class="site-logo"
             :src="logo"
-          />
+          /> -->
         </span>
         <span class="logo-line-after"/>
       </router-link>
@@ -30,13 +31,6 @@
               <router-link :to="{name: route.name}">{{ route.meta.title }}</router-link>
             </li>
           </template>
-          <li class="menu-item">
-            <a href="https://hellomrbigbigshot.xyz">
-              <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-React"/>
-              </svg> 版本
-            </a>
-          </li>
         </ul>
         <div :class="['site-search', {'active': isFocus}]">
           <div class="site-search-form">
