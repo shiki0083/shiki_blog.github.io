@@ -9,21 +9,12 @@
 
 ``` bash
 # install dependencies
-yarn
+npm
 
 # serve with hot reload at localhost:8080
-yarn serve
+npm serve
 
 # build for production with minification
-yarn build
-
-# build for production and view the bundle analyzer report
-yarn report
+npm build
 ```
-## 介绍
-此项目是用```vue-cli```构造的[本人博客](http://vue.hellomrbigbigshot.xyz)的前端项目。
-
-## 相关链接
-### 后端项目
-[后端项目](https://github.com/hellomrbigshot/blog-pwa/tree/master/server)
 
