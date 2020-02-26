@@ -15,7 +15,7 @@ module.exports = {
 		}
 	},
 	devServer: {
-		port: 10086,
+		port: 8888,
 		historyApiFallback: {
 			rewrites: [ { from: /^\/$/, to: '/index.html' } ],
 			disableDotRule: true

@@ -80,7 +80,7 @@ export default {
     return {
       isFocus: false,
       keywords: '',
-      logo: require('@/assets/img/logo_black_transparent.png'),
+      // logo: require('@/assets/img/logo_black_transparent.png'),
       showUl: false
     }
   },

@@ -5,18 +5,23 @@
     @mousemove="handleToggleMenu(true)"
     @mouseleave="handleToggleMenu(false)"
   >
-    <img class="user-avatar" :src="avatarUrl" alt="avatar"/>
-    <div v-if="showMenu" class="avatar-menu-list" @mouseenter="handleToggleMenu(true)" @mouseleave="handleToggleMenu(false)">
+    <img class="user-avatar" :src="avatarUrl" alt='123' />
+    <div
+      v-if="showMenu"
+      class="avatar-menu-list"
+      @mouseenter="handleToggleMenu(true)"
+      @mouseleave="handleToggleMenu(false)"
+    >
       <div v-for="(item, i) in menuList" :key="i" class="avatar-menu-list-item">
         <router-link v-if="item.route" :to="item.route">
           <svg class="icon" aria-hidden="true">
-            <use :xlink:href="item.icon"></use>
+            <use :xlink:href="item.icon" />
           </svg>
           <div>{{ item.title }}</div>
         </router-link>
         <a v-else @click="item.click">
           <svg class="icon" aria-hidden="true">
-            <use :xlink:href="item.icon"></use>
+            <use :xlink:href="item.icon" />
           </svg>
           <div>{{ item.title }}</div>
         </a>
@@ -26,67 +31,68 @@
 </template>
 <script>
 export default {
-  name: 'AvatarPart',
+  name: "AvatarPart",
   props: {
     username: {
       type: String,
-      default: ''
+      default: ""
     }
   },
-  data () {
+  data() {
     return {
       menuList: [
         {
-          title: '我的主页',
-          route: { name: 'UserDetail', params: { username: this.username } },
-          icon: 'icon-UserSettings'
+          title: "我的主页",
+          route: { name: "UserDetail", params: { username: this.username } },
+          icon: "icon-UserSettings"
         },
         {
-          title: '我的文章',
-          route: { name: 'PageListForUser' },
-          icon: 'icon-UserSettings'
+          title: "我的文章",
+          route: { name: "PageListForUser" },
+          icon: "icon-UserSettings"
         },
         {
-          title: '我的草稿',
-          route: { name: 'PageListForDraft' },
-          icon: 'icon-draft'
+          title: "我的草稿",
+          route: { name: "PageListForDraft" },
+          icon: "icon-draft"
         },
+        // {
+        //   title: '我的评论',
+        //   route: { name: 'CommentList' },
+        //   icon: 'icon-comment'
+        // },
         {
-          title: '我的评论',
-          route: { name: 'CommentList' },
-          icon: 'icon-comment'
-        },
-        {
-          title: '退出',
-          icon: 'icon-signout_detail_toil',
+          title: "退出",
+          icon: "icon-signout_detail_toil",
           click: () => {
-            this.loginOut()
+            this.loginOut();
           }
         }
       ],
-      showMenu: false
-    }
+      showMenu: false,
+      avatarUrl:  require('@/assets/img/pat_avatar.png'),
+    };
   },
   computed: {
-    avatarUrl () {
-      return `/api/file/avatar/user/?username=${this.username}`
-    }
+    // avatarUrl () {
+    // return `/api/file/avatar/user/?username=${this.username}`
+    // }
   },
   methods: {
-    handleToggleMenu (value) {
+    handleToggleMenu(value) {
       if (this.showMenu !== value) {
-        this.showMenu = value
+        this.showMenu = value;
       }
     },
-    loginOut () {
+    loginOut() {
       // 退出登录
-      this.Cookies.remove('user')
-      this.Cookies.remove('token')
-      this.Cookies.remove('refreshToken')
-      this.$store.commit('updateUser', { username: '' })
+      this.Cookies.remove("user");
+      this.Cookies.remove("token");
+      this.Cookies.remove("refreshToken");
+      this.$store.commit("updateUser", { username: "" });
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .avatar-wrapper {
@@ -103,9 +109,10 @@ export default {
   height: 50px;
   border-radius: 50%;
 }
-.avatar-wrapper-down, .avatar-wrapper-up {
+.avatar-wrapper-down,
+.avatar-wrapper-up {
   &:after {
-    content: '';
+    content: "";
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     position: absolute;

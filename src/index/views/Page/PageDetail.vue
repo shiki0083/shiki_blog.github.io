@@ -1,69 +1,53 @@
 <template>
   <div>
     <transition name="slide-fade">
-      <article v-if="show_detail">
+      <div class="contain" v-if="show_detail">
         <header>
           <h1 class="page-title">{{ page.title }}</h1>
           <div class="page-info">
             <span
               v-if="Common.formatTime(page.update_time, '3')!==Common.formatTime(page.create_time, '3')"
               class="update-time"
-            >更新于
+            >
+              更新于
               <time>{{ Common.formatTime(page.update_time, '3') }}</time>
               &nbsp;|&nbsp;
             </span>
-            <span class="update-time">创建于
+            <span class="update-time">
+              创建于
               <time>{{ Common.formatTime(page.create_time, '3') }}</time>
               &nbsp;|&nbsp;
             </span>
-            <span class="create-user">作者
+            <span class="create-user">
+              作者
               <router-link :to="{ name: 'UserDetail', params: { username:  page.create_user }}">
                 <span class="user-span">{{ page.create_user }}</span>
-              </router-link>
-              &nbsp;|&nbsp;
+              </router-link>&nbsp;|&nbsp;
             </span>
-            <span class="create-user">标签
+            <span class="create-user">
+              标签
               <template v-for="(tag, i) in page.tags">
-                <router-link
-                  :to="{name: 'TagDetail', params: {name:  tag}}"
-                  :key="`${i}router`"
-                >
+                <router-link :to="{name: 'TagDetail', params: {name:  tag}}" :key="`${i}router`">
                   <span class="tag-span">{{ tag }}</span>
                 </router-link>
-                <span
-                  v-if="i<page.tags.length-1"
-                  :key="`${i}span`"
-                >,</span>
+                <span v-if="i<page.tags.length-1" :key="`${i}span`">,</span>
               </template>
               &nbsp;|&nbsp;
             </span>
-            <span
-              class="edit-span"
-              v-if="Cookies.get('user')===page.create_user"
-            >
+            <span class="edit-span" v-if="Cookies.get('user')===page.create_user">
               <router-link :to="{name: 'PageEdit', params: {id: id}}">编辑</router-link>
             </span>
           </div>
         </header>
-        <div
-          class="page-body m-editor-preview"
-          v-html="marked(page.content)"
-        ></div>
-      </article>
+        <div class="page-body m-editor-preview" v-html="marked(page.content)"></div>
+      </div>
     </transition>
     <transition name="fade">
       <div v-if="comments.length">
-        <comments
-          :comments="comments"
-          @on-reply="replyComment"
-          @on-ready="scrollToComment"
-        ></comments>
+        <comments :comments="comments" @on-reply="replyComment" @on-ready="scrollToComment"></comments>
       </div>
     </transition>
-    <div
-      style="margin-bottom: 20px;"
-      v-show="show_detail"
-    >
+    <div style="margin-bottom: 20px;" v-show="show_detail">
       <p :style="{ fontSize: '20px', marginBottom: '15px' }">留言：</p>
       <Tag
         closable
@@ -78,99 +62,97 @@
         v-model.trim="comment.content"
         :rows="6"
       />
-      <Button
-        type="primary"
-        :style="{ marginTop: '15px'}"
-        @click="submitComment"
-      >发表</Button>
+      <Button type="primary" :style="{ marginTop: '15px'}" @click="submitComment">发表</Button>
     </div>
   </div>
 </template>
 <script>
 export default {
   components: {
-    comments: () => import('index/components/CommentsForPage')
+    comments: () => import("index/components/CommentsForPage")
   },
-  data () {
+  data() {
     return {
       id: this.$route.params.id,
-      user: this.Cookies.get('user'),
+      user: this.Cookies.get("user"),
       show_detail: false,
       page: {
-        title: '',
-        create_user: '',
-        create_time: '',
-        update_time: '',
-        content: ''
+        title: "",
+        create_user: "",
+        create_time: "",
+        update_time: "",
+        content: ""
       },
       comments: [],
       comment: {
-        content: '',
-        reply_user: '',
-        reply_content: ''
+        content: "",
+        reply_user: "",
+        reply_content: ""
       }
-    }
+    };
   },
-  mounted () {
-    this.getPageDetail()
-    this.getComments()
+  mounted() {
+    this.getPageDetail();
+    this.getComments();
   },
   methods: {
-    getPageDetail () {
-      this.Common.axios('/api/page/detail', { id: this.id }).then(res => {
-        this.page = res.data.data
-        this.show_detail = true
-      })
+    getPageDetail() {
+      this.Common.axios("/api/page/detail", { id: this.id }).then(res => {
+        this.page = res.data.data;
+        this.show_detail = true;
+      });
     },
-    getComments () {
-      this.Common.axios('/api/comment/getpagecommentlist', { page_id: this.id }).then(res => {
-        this.comments = res.data.data
-      })
+    getComments() {
+      this.Common.axios("/api/comment/getpagecommentlist", {
+        page_id: this.id
+      }).then(res => {
+        this.comments = res.data.data;
+      });
     },
-    submitComment () {
+    submitComment() {
       if (!this.user) {
         // 如果没有登录就跳转到登录页
         this.$router.push({
-          name: 'Login',
+          name: "Login",
           query: { redirect: this.$route.fullPath }
-        })
+        });
       }
       if (!this.comment.content) {
-        this.$Message.warning('留言不能为空！')
-        return false
+        this.$Message.warning("留言不能为空！");
+        return false;
       }
-      this.comment.page_title = this.page.title
-      this.comment.page_id = this.id
-      this.comment.create_user = this.user
-      this.comment.to_user = this.page.create_user
-      this.Common.axios('/api/comment/create', this.comment).then(res => {
-        this.comment.content = ''
-        this.comment.reply_user = ''
-        this.comment.reply_content = ''
-        this.$Message.success('留言成功')
-        this.getComments()
-      })
+      this.comment.page_title = this.page.title;
+      this.comment.page_id = this.id;
+      this.comment.create_user = this.user;
+      this.comment.to_user = this.page.create_user;
+      this.Common.axios("/api/comment/create", this.comment).then(res => {
+        this.comment.content = "";
+        this.comment.reply_user = "";
+        this.comment.reply_content = "";
+        this.$Message.success("留言成功");
+        this.getComments();
+      });
     },
-    replyComment (user, content) {
-      this.comment.reply_user = user
-      this.comment.reply_content = content
-      this.$refs['commentInput'].focus()
+    replyComment(user, content) {
+      this.comment.reply_user = user;
+      this.comment.reply_content = content;
+      this.$refs["commentInput"].focus();
     },
-    removeReplyUser () {
-      this.comment.reply_user = ''
-      this.comment.reply_content = ''
+    removeReplyUser() {
+      this.comment.reply_user = "";
+      this.comment.reply_content = "";
     },
-    scrollToComment () {
-      const hash = this.$route.params.hash
+    scrollToComment() {
+      const hash = this.$route.params.hash;
       if (hash && document.getElementById(hash)) {
-        document.getElementById(hash).scrollIntoView()
+        document.getElementById(hash).scrollIntoView();
       }
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
-article {
+.contain {
   width: 700px;
   margin: 0 auto;
   @media screen and (min-width: 1600px) {

@@ -3,9 +3,9 @@
     <div class="blog-footer-content">
       <p>
         Created By LJL
-        <a class="github-link" href="https://github.com/shiki0083/shiki_blog">
+        <!-- <a class="github-link" href="https://github.com/shiki0083/shiki_blog">
           <Icon type="logo-github" :size="20" />
-        </a>
+        </a> -->
       </p>
       <p>
         由

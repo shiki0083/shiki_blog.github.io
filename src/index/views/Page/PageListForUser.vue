@@ -2,7 +2,7 @@
   <div>
     <Timeline>
       <TimelineItem color="#aaaaaa">
-        <span>嗯..! 目前共计 {{total}} 篇日志。 继续努力。</span>
+        <span>目前共计 {{total}} 篇记录哟！。 </span>
       </TimelineItem>
       <template v-for="(year, i) in pageList">
         <TimelineItem

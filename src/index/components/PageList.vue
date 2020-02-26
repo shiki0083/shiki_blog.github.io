@@ -1,6 +1,6 @@
 <template>
     <div>
-        <article v-for="(page, i) in pageList" :key="i" class="article">
+        <div v-for="(page, i) in pageList" :key="i" class="article">
             <header class="page-header">
                 <router-link :to="{ name: 'PageDetail', params: { id: page._id } }">
                     <h1 class="page-title">
@@ -11,7 +11,7 @@
                     <time>{{ page.create_time.substring(5, 10) }}</time>
                 </div>
             </header>
-        </article>
+        </div>
     </div>
 
 </template>

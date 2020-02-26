@@ -214,10 +214,11 @@ export default {
             this.$Message.success('提交成功')
             this.$store.commit('updateUserInfo', res.data.data)
             this.$refs['pageForm'].resetFields()
+            console.log('222222222',this.id)
             if (type === 'normal' && this.id) {
               this.$router.push({ name: 'PageDetail', params: { id: this.id } })
             } else if (type === 'normal' && !this.id) {
-              this.$router.push({ name: 'normalPageList' })
+              this.$router.push({ name: 'Home' })
             } else {
               this.$router.push({ name: 'draft' })
             }

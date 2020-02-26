@@ -45,7 +45,7 @@
             @click="toRegisterPage"
           >注册</Button>
         </FormItem>
-        <FormItem label="第三方登录：">
+        <!-- <FormItem label="第三方登录：">
           <ul class="icon-list">
             <li>
               <a
@@ -70,13 +70,8 @@
               </a>
             </li>
           </ul>
-        </FormItem>
+        </FormItem> -->
       </Form>
-      <!-- <mForm ref="signinForm" :model="formData" :rules="rule" class="login-form">
-              <mFormItem prop="username" label="用户名">
-                <mInput type="text" v-model="formData.username" placeholder="用户名" transfer></mInput>
-              </mFormItem>
-            </mForm> -->
     </div>
   </div>
 </template>
