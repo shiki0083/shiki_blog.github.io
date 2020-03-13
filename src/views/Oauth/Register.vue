@@ -15,6 +15,10 @@
           <Input type="password" style="display:none" />
           <Input v-model="formData.repassword" type="password" placeholder="再次输入密码" />
         </FormItem>
+        <FormItem prop="helloWorld">
+          <Input type="password" style="display:none" />
+          <Input v-model="formData.helloWorld" type="password" placeholder="请输入邀请码" />
+        </FormItem>
         <FormItem>
           <Button type="primary" size="large" long @click="register('registerForm')">注册</Button>
           <Button

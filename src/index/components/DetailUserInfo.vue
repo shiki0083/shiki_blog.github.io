@@ -21,7 +21,7 @@
           @change="uploadImg($event)"
         />
       </div>
-      <ul class="user-oauths-icons">
+      <!-- <ul class="user-oauths-icons">
         <li>
           <a
             :style="{color: oauth_accounts.github.oauth ? '#2c3e50': '#ddd'}"
@@ -44,7 +44,7 @@
             />
           </a>
         </li>
-      </ul>
+      </ul> -->
     </div>
     <div class="user-info-desc">
       <div class="user-info-name">

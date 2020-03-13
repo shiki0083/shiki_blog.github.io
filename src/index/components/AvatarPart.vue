@@ -5,7 +5,7 @@
     @mousemove="handleToggleMenu(true)"
     @mouseleave="handleToggleMenu(false)"
   >
-    <img class="user-avatar" :src="avatarUrl" alt='123' />
+    <img class="user-avatar" :src="avatarUrl" alt="123" />
     <div
       v-if="showMenu"
       class="avatar-menu-list"
@@ -30,6 +30,8 @@
   </div>
 </template>
 <script>
+import defaultImg from '@/assets/logo.png'
+
 export default {
   name: "AvatarPart",
   props: {
@@ -70,13 +72,13 @@ export default {
         }
       ],
       showMenu: false,
-      avatarUrl:  require('@/assets/img/pat_avatar.png'),
+      // avatarUrl:defaultImg || `/api/file/avatar/user/?username=${this.username}`,
     };
   },
   computed: {
-    // avatarUrl () {
-    // return `/api/file/avatar/user/?username=${this.username}`
-    // }
+    avatarUrl() {
+      return `/api/file/avatar/user/?username=${this.username}`;
+    }
   },
   methods: {
     handleToggleMenu(value) {

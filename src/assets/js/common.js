@@ -97,6 +97,9 @@ const request = (url, formData = {}, headers = {}) => {
   }).then(res => {
     return res
   }).catch(e  => {
+    console.log('====================================');
+    console.log(e);
+    console.log('====================================');
     if (e.response.status === 401) {
       // token 超时，访问刷新 token 接口
       return fetchRefreshToken().then(res => {
