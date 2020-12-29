@@ -1,41 +1,43 @@
-const path = require('path');
+const path = require("path");
 function resolve(dir) {
-	return path.join(__dirname, dir);
+  return path.join(__dirname, dir);
 }
 module.exports = {
-	runtimeCompiler: true,
-	productionSourceMap: false,
-	pages: {
-		index: {
-			entry: 'src/index/main.js',
-			template: 'public/index.html',
-			filename: 'index.html',
-			title: '与其感慨路难行，不如马上出发吧',
-			chunks: [ 'chunk-vendors', 'chunk-common', 'index' ]
-		}
-	},
-	devServer: {
-		port: 8888,
-		historyApiFallback: {
-			rewrites: [ { from: /^\/$/, to: '/index.html' } ],
-			disableDotRule: true
-		},
-		proxy: {
-			// '/api': {
-			//   target: 'https://hellomrbigbigshot.xyz',
-			//   changeOrigin: true
-			// },
-			'^/api': {
-				target: 'http://localhost:8081',
-				ws: true,
-				changeOrigin: true
-			}
-		}
-	},
-	chainWebpack: (config) => {
-		config.module.rule('vue').use('vue-loader').loader('vue-loader').tap((options) => {
-			options.compilerOptions.preserveWhitespace = true;
-		});
-		config.resolve.alias.set('@$', resolve('src')).set('index', resolve('src/index'));
-	}
+  runtimeCompiler: true,
+  productionSourceMap: false,
+  pages: {
+    index: {
+      entry: "src/index/main.js",
+      template: "public/index.html",
+      filename: "index.html",
+      title: "与其感慨路难行，不如马上出发吧",
+      chunks: ["chunk-vendors", "chunk-common", "index"]
+    }
+  },
+  devServer: {
+    port: 8888,
+    historyApiFallback: {
+      rewrites: [{ from: /^\/$/, to: "/index.html" }],
+      disableDotRule: true
+    },
+    proxy: {
+      "^/api": {
+        target: "http://localhost:8081",
+        ws: true,
+        changeOrigin: true
+      }
+    }
+  },
+  chainWebpack: config => {
+    config.module
+      .rule("vue")
+      .use("vue-loader")
+      .loader("vue-loader")
+      .tap(options => {
+        options.compilerOptions.preserveWhitespace = true;
+      });
+    config.resolve.alias
+      .set("@$", resolve("src"))
+      .set("index", resolve("src/index"));
+  }
 };
