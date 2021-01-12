@@ -12,7 +12,13 @@
         <a class="footer-link" href="https://cn.vuejs.org/">Vue.js</a>
         强力驱动
       </p>
-      <p :style="{textAlign: 'left', fontSize: '12px'}">备案号：浙ICP备20000201号</p>
+      <a
+        :style="{ textAlign: 'left', fontSize: '12px' }"
+        href="https://beian.miit.gov.cn/"
+        target="_blank"
+        >备案号：浙ICP备20000201号-1</a
+      >
+      <!-- <p :style="{textAlign: 'left', fontSize: '12px'}">备案号：浙ICP备20000201号-1</p> -->
     </div>
   </div>
 </template>
@@ -20,8 +26,7 @@
 <script>
 export default {
   data() {
-    return {
-    };
+    return {};
   }
 };
 </script>
