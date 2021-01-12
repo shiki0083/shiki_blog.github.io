@@ -16,7 +16,7 @@
         :style="{ textAlign: 'left', fontSize: '12px' }"
         href="https://beian.miit.gov.cn/"
         target="_blank"
-        >备案号：浙ICP备20000201号-1</a
+        >ICP备案号：浙ICP备20000201号-1</a
       >
       <!-- <p :style="{textAlign: 'left', fontSize: '12px'}">备案号：浙ICP备20000201号-1</p> -->
     </div>
