@@ -36,7 +36,7 @@ export default {
   padding: 10px 0;
 }
 p {
-  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .github-link {
   color: #495060;
