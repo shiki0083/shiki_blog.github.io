@@ -1,33 +1,41 @@
 <template>
   <div class="contain">
-    <router-link :to="{ name: 'PageDetail', params: { id: page._id }}">
+    <router-link :to="{ name: 'PageDetail', params: { id: page._id } }">
       <div class="page-title">{{ page.title }}</div>
     </router-link>
     <div class="page-info">
       <span
         class="create-time"
-        v-if="Common.formatTime(page.update_time, '3')===Common.formatTime(page.create_time, '3')"
+        v-if="
+          Common.formatTime(page.update_time, '3') ===
+            Common.formatTime(page.create_time, '3')
+        "
       >
-        创建于1111
-        <time>{{ Common.formatTime(page.update_time, '3') }}</time>
+        创建于
+        <time>{{ Common.formatTime(page.update_time, "3") }}</time>
       </span>
       <span class="create-time" v-else>
         更新于
-        <time>{{ Common.formatTime(page.update_time, '3') }}</time>
+        <time>{{ Common.formatTime(page.update_time, "3") }}</time>
       </span>
       <span class="create-user">
         &nbsp;|&nbsp;作者
-        <router-link :to="{ name: 'UserDetail', params: { username:  page.create_user } }">
+        <router-link
+          :to="{ name: 'UserDetail', params: { username: page.create_user } }"
+        >
           <span class="user-span">{{ page.create_user }}</span>
         </router-link>
       </span>
       <span class="page-tag">
         &nbsp;|&nbsp;标签
         <template v-for="(tag, i) in page.tags">
-          <router-link :to="{name: 'TagDetail', params: {name:  tag}}" :key="`${i}router`">
+          <router-link
+            :to="{ name: 'TagDetail', params: { name: tag } }"
+            :key="`${i}router`"
+          >
             <span class="tag-span">{{ tag }}</span>
           </router-link>
-          <span v-if="i<page.tags.length-1" :key="`${i}span`">,</span>
+          <span v-if="i < page.tags.length - 1" :key="`${i}span`">,</span>
         </template>
       </span>
     </div>
