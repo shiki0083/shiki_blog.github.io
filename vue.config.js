@@ -12,18 +12,27 @@ module.exports = {
       filename: "index.html",
       title: "与其感慨路难行，不如马上出发吧",
       chunks: ["chunk-vendors", "chunk-common", "index"]
+    },
+    admin: {
+      entry: "src/admin/main.js",
+      template: "public/admin.html",
+      filename: "admin.html",
+      title: "管理",
+      chunks: ["chunk-vendors", "chunk-common", "admin"]
     }
   },
   devServer: {
     port: 8888,
     historyApiFallback: {
-      rewrites: [{ from: /^\/$/, to: "/index.html" }],
+      rewrites: [
+        { from: /^\/$/, to: "/index.html" },
+        { from: /^\/admin\//, to: "/admin.html" }
+      ],
       disableDotRule: true
     },
     proxy: {
       "^/api": {
         target: "http://localhost:8081",
-        ws: true,
         changeOrigin: true
       }
     }
@@ -38,6 +47,7 @@ module.exports = {
       });
     config.resolve.alias
       .set("@$", resolve("src"))
-      .set("index", resolve("src/index"));
+      .set("index", resolve("src/index"))
+      .set("admin", resolve("src/admin"));
   }
 };
