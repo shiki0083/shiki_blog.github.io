@@ -2,17 +2,14 @@
   <div class="user-info">
     <div class="user-info-left">
       <div class="user-avatar">
-        <img
-          :src="imgUrl"
-          alt="头像"
-          class="user-avatar-img"
-          ref="img"
-        >
+        <img :src="imgUrl" alt="头像" class="user-avatar-img" ref="img" />
         <div
           class="user-avatar-btn"
           @click="chooseFile"
           v-if="cur_username === username"
-        >上传头像</div>
+        >
+          上传头像
+        </div>
         <input
           type="file"
           style="display: none"
@@ -55,29 +52,22 @@
           @click="changeBio"
           class="bio-icon"
           v-if="cur_username === username"
-          :title="bio_edit?'保存':'编辑'"
+          :title="bio_edit ? '保存' : '编辑'"
         >
           <Icon
             size="10"
-            :type="bio_edit?'md-checkmark':'md-create'"
+            :type="bio_edit ? 'md-checkmark' : 'md-create'"
           ></Icon>
         </a>
         <div v-if="!bio_edit">
-          {{ user.bio || '您还没有填写个人简介' }}
+          {{ user.bio || "您还没有填写个人简介" }}
         </div>
         <div v-else>
-          <Input
-            type="textarea"
-            v-model="user.bio"
-            :rows="3"
-          />
+          <Input type="textarea" v-model="user.bio" :rows="3" />
         </div>
       </div>
     </div>
-    <Modal
-      v-model="showImgUpload"
-      title="更换头像"
-    >
+    <Modal v-model="showImgUpload" title="更换头像">
       <div class="cropper-content">
         <div class="cropper">
           <vue-cropper
@@ -98,26 +88,21 @@
         </div>
         <div
           class="show-preview"
-          :style="{'width': previews.w + 'px', 'height': previews.h + 'px',  'overflow': 'hidden', 'margin': '5px'}"
+          :style="{
+            width: previews.w + 'px',
+            height: previews.h + 'px',
+            overflow: 'hidden',
+            margin: '5px'
+          }"
         >
-          <div
-            :style="previews.div"
-            class="preview"
-          >
-            <img
-              :src="previews.url"
-              :style="previews.img"
-            >
+          <div :style="previews.div" class="preview">
+            <img :src="previews.url" :style="previews.img" />
           </div>
         </div>
       </div>
       <div class="footer-btn">
         <div class="scope-btn">
-          <Button
-            type="info"
-            size="small"
-            @click="chooseFile"
-          >修改附件</Button>
+          <Button type="info" size="small" @click="chooseFile">修改附件</Button>
           <Button
             type="primary"
             size="small"
@@ -141,42 +126,37 @@
           ></Button>
         </div>
         <div class="upload-btn">
-          <Button
-            type="success"
-            size="small"
-            @click="uploadFile"
-          >上传</Button>
+          <Button type="success" size="small" @click="uploadFile">上传</Button>
         </div>
       </div>
-      <div slot="footer">
-      </div>
+      <div slot="footer"></div>
     </Modal>
   </div>
 </template>
 
 <script>
-import { VueCropper } from 'vue-cropper'
-import defaultImg from '@/assets/logo.png'
+import { VueCropper } from "vue-cropper";
+import defaultImg from "@/assets/logo.png";
 export default {
   components: {
-    'vue-cropper': VueCropper
+    "vue-cropper": VueCropper
   },
-  data () {
+  data() {
     return {
-      cur_username: this.Cookies.get('user'),
+      cur_username: this.Cookies.get("user"),
       username: this.$route.params.username,
       showImgUpload: false,
       bio_edit: false,
       imgUrl: defaultImg,
       defaultImg: defaultImg,
       user: {
-        avatar: '',
-        gender: 'm',
-        bio: ''
+        avatar: "",
+        gender: "m",
+        bio: ""
       },
       option: {
-        img: '',
-        outputType: 'png',
+        img: "",
+        outputType: "png",
         autoCrop: true,
         // 只有自动截图开启 宽度高度才生效
         autoCropWidth: 150,
@@ -193,131 +173,133 @@ export default {
       },
       previews: {
         w: 0,
-        img: '',
+        img: "",
         h: 0
       },
       oauth_accounts: {
         github: {
           oauth: false,
-          oauth_user: ''
+          oauth_user: ""
         },
         weibo: {
           oauth: false,
-          oauth_user: ''
+          oauth_user: ""
         }
       }
-    }
+    };
   },
-  async mounted () {
-    await this.getUserDetail()
-    this.showAvatar()
+  async mounted() {
+    await this.getUserDetail();
+    this.showAvatar();
   },
   methods: {
-    getUserDetail () {
-      return this.Common.axios('/api/user/detail', {
+    getUserDetail() {
+      return this.Common.axios("/api/user/detail", {
         username: this.username
       }).then(res => {
-        this.user = res.data.data
+        this.user = res.data.data;
         Object.keys(this.oauth_accounts).forEach(type => {
           const filterOauthObj = this.user.oauthinfo.find(
             item => item.type === type
-          )
+          );
           if (filterOauthObj) {
-            this.oauth_accounts[type].oauth = true
-            this.oauth_accounts[type].oauth_user = filterOauthObj.domain || filterOauthObj.name
+            this.oauth_accounts[type].oauth = true;
+            this.oauth_accounts[type].oauth_user =
+              filterOauthObj.domain || filterOauthObj.name;
           } else {
-            this.oauth_accounts[type].oauth = false
-            this.oauth_accounts[type].oauth_user = ''
+            this.oauth_accounts[type].oauth = false;
+            this.oauth_accounts[type].oauth_user = "";
           }
-        })
-      })
+        });
+      });
     },
-    chooseFile () {
-      this.$refs.fileInput.value = ''
-      this.$refs.fileInput.click()
+    chooseFile() {
+      this.$refs.fileInput.value = "";
+      this.$refs.fileInput.click();
     },
-    uploadImg (e) {
-      const file = e.target.files[0]
+    uploadImg(e) {
+      const file = e.target.files[0];
       if (!/\.(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG)$/.test(e.target.value)) {
-        this.$Message.error('图片类型必须是.gif,jpeg,jpg,png,bmp中的一种')
-        return false
+        this.$Message.error("图片类型必须是.gif,jpeg,jpg,png,bmp中的一种");
+        return false;
       }
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onload = e => {
-        let data
-        if (typeof e.target.result === 'object') {
+        let data;
+        if (typeof e.target.result === "object") {
           // 把Array Buffer转化为blob 如果是base64不需要
-          data = window.URL.createObjectURL(new Blob([e.target.result]))
+          data = window.URL.createObjectURL(new Blob([e.target.result]));
         } else {
-          data = e.target.result
+          data = e.target.result;
         }
 
-        this.option.img = data
-      }
+        this.option.img = data;
+      };
       // 转化为base64
-      reader.readAsDataURL(file)
+      reader.readAsDataURL(file);
       // 转化为blob
       // reader.readAsArrayBuffer(file)
-      this.showImgUpload = true
+      this.showImgUpload = true;
     },
-    realTime (data) {
-      this.previews = data
+    realTime(data) {
+      this.previews = data;
     },
-    changeScale (num) {
-      this.$refs.cropper.changeScale(num)
+    changeScale(num) {
+      this.$refs.cropper.changeScale(num);
     },
-    rotateLeft () {
-      this.$refs.cropper.rotateLeft()
+    rotateLeft() {
+      this.$refs.cropper.rotateLeft();
     },
-    rotateRight () {
-      this.$refs.cropper.rotateRight()
+    rotateRight() {
+      this.$refs.cropper.rotateRight();
     },
-    uploadFile () {
+    uploadFile() {
       // 获取截图的base64 数据
       this.$refs.cropper.getCropData(data => {
         // 上传
-        this.Common.axios('/api/file/uploadAvatar', {
+        this.Common.axios("/api/file/uploadAvatar", {
           imgData: data,
           username: this.cur_username
         }).then(res => {
-          this.user.avatar = res.data.data
-          this.showAvatar()
-          this.showImgUpload = false
-          this.$store.commit('updateUserInfo', { avatar: res.data.data })
-        })
-      })
+          this.user.avatar = res.data.data;
+          this.showAvatar();
+          this.showImgUpload = false;
+          this.$store.commit("updateUserInfo", { avatar: res.data.data });
+        });
+      });
     },
-    showAvatar () {
+    showAvatar() {
       // 显示头像
       if (this.user.avatar) {
-        this.imgUrl = '/api/file/avatar/user/?username=' + this.user.username
+        this.imgUrl = "/api/file/avatar/user/?username=" + this.user.username;
       } else {
         this.imgUrl =
           (this.user.oauthinfo.find(item => item.avatar_url) &&
-            this.user.oauthinfo.find(item => item.avatar_url).avatar_url) || this.defaultImg
+            this.user.oauthinfo.find(item => item.avatar_url).avatar_url) ||
+          this.defaultImg;
       }
       this.$refs.img.onerror = () => {
-        this.imgUrl = this.defaultImg
-      }
+        this.imgUrl = this.defaultImg;
+      };
       this.$refs.img.onload = () => {
-        this.imgShow = true
-      }
+        this.imgShow = true;
+      };
     },
-    changeBio () {
+    changeBio() {
       // 修改个人简介
       if (!this.bio_edit) {
-        this.bio_edit = true
+        this.bio_edit = true;
       } else {
-        this.Common.axios('/api/user/updatebio', {
+        this.Common.axios("/api/user/updatebio", {
           username: this.user.username,
           bio: this.user.bio
         }).then(res => {
-          this.bio_edit = false
-        })
+          this.bio_edit = false;
+        });
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
