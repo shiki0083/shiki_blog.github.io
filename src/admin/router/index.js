@@ -32,16 +32,23 @@ router.beforeEach((to, from, next) => {
     next(false);
   }
   iView.LoadingBar.start();
+  console.log("routerrouter", router);
+  console.log("Cookies", Cookies);
+  console.log("to", to);
+  console.log("from", from);
   if (!Cookies.get("user") && to.name !== "login" && to.meta.login) {
+    console.log("1");
     next({
       name: "login",
       query: { redirect: router.currentRoute.fullPath }
     });
   } else if (Cookies.get("user") && to.name === "login") {
+    console.log("2");
     next({
       name: "home"
     });
   } else {
+    console.log("3");
     next();
   }
 });

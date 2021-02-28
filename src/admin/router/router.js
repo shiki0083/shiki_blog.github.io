@@ -38,7 +38,7 @@ export const oauthRegisterRouter = {
 };
 export const routes = [
   {
-    path: "/",
+    path: "/admin",
     name: "home",
     component: () => import("admin/views/home"),
     redirect: "/dashboard",
