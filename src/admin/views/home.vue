@@ -108,6 +108,7 @@ export default {
           this.Cookies.remove("token");
           this.Cookies.remove("refreshToken");
           location.reload();
+          window.location = "http://www.shikiblog.top/";
         });
       }
     }
