@@ -64,9 +64,6 @@ marked.setOptions({
   smartypants: false,
   xhtml: false
 });
-Vue.prototype.Common = Common;
-Vue.prototype.Cookies = Cookies;
-Vue.prototype.marked = marked;
 Vue.component("el-select", ElSelect);
 Vue.component("el-option", ElOption);
 Vue.component("el-form", ElForm);
@@ -96,8 +93,12 @@ Vue.component("Tabs", Tabs);
 Vue.component("TabPane", TabPane);
 Vue.component("Badge", Badge);
 Vue.component("BackTop", BackTop);
+
 Vue.prototype.$Message = Message;
 Vue.prototype.$Modal = Modal;
+Vue.prototype.Common = Common;
+Vue.prototype.Cookies = Cookies;
+Vue.prototype.marked = marked;
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
