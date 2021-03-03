@@ -4,12 +4,7 @@
       <h1 class="head">
         登录
       </h1>
-      <Form
-        ref="signinForm"
-        :model="formData"
-        :rules="rule"
-        class="login-form"
-      >
+      <Form ref="signinForm" :model="formData" :rules="rule" class="login-form">
         <FormItem prop="username">
           <Input style="display:none" />
           <Input
@@ -20,10 +15,7 @@
           />
         </FormItem>
         <FormItem prop="password">
-          <Input
-            type="password"
-            style="display:none"
-          />
+          <Input type="password" style="display:none" />
           <Input
             v-model="formData.password"
             type="password"
@@ -31,19 +23,17 @@
           />
         </FormItem>
         <FormItem>
-          <Button
-            type="primary"
-            size="large"
-            long
-            @click="logIn('signinForm')"
-          >登录</Button>
+          <Button type="primary" size="large" long @click="logIn('signinForm')"
+            >登录</Button
+          >
           <Button
             type="default"
             size="large"
             long
-            :style="{marginTop: '10px'}"
+            :style="{ marginTop: '10px' }"
             @click="toRegisterPage"
-          >注册</Button>
+            >注册</Button
+          >
         </FormItem>
         <!-- <FormItem label="第三方登录：">
           <ul class="icon-list">
@@ -77,50 +67,53 @@
 </template>
 <script>
 export default {
-  name: 'Login',
-  components: {
-  },
-  data () {
+  name: "Login",
+  components: {},
+  data() {
     return {
       formData: {
-        username: '',
-        password: ''
+        username: "",
+        password: ""
       },
       rule: {
-        username: [{ required: true, trigger: 'blur', message: '请输入账号' }],
-        password: [{ required: true, trigger: 'blur', message: '请输入密码' }]
+        username: [{ required: true, trigger: "blur", message: "请输入账号" }],
+        password: [{ required: true, trigger: "blur", message: "请输入密码" }]
       }
-    }
+    };
   },
   methods: {
-    logIn (name) {
+    logIn(name) {
       this.$refs[name].validate(valid => {
-        if (!valid) return
-        const { username } = this.formData
-        this.Common.axios('/api/signin', this.formData).then(res => {
-          this.Cookies.set('user', username)
-          this.$store.commit('updateUser', { username })
-          const { data: { data: { token, refresh_token: refreshToken } } } = res
-          this.Cookies.set('token', token)
-          this.Cookies.set('refreshToken', refreshToken)
-          if (this.formData.username === 'admin') {
-            this.$router.push({ name: 'admin' })
-            return false
+        if (!valid) return;
+        const { username } = this.formData;
+        this.Common.axios("/api/signin", this.formData).then(res => {
+          this.Cookies.set("user", username);
+          this.$store.commit("updateUser", { username });
+          const {
+            data: {
+              data: { token, refresh_token: refreshToken }
+            }
+          } = res;
+          this.Cookies.set("token", token);
+          this.Cookies.set("refreshToken", refreshToken);
+          if (this.formData.username === "admin") {
+            this.$router.push({ name: "admin" });
+            return false;
           }
           if (this.$route.query.redirect) {
-            const url = decodeURIComponent(this.$route.query.redirect)
-            this.$router.push(url)
-            return false
+            const url = decodeURIComponent(this.$route.query.redirect);
+            this.$router.push(url);
+            return false;
           }
-          this.$router.push({ name: 'PageList' })
-        })
-      })
+          this.$router.push({ name: "PageList" });
+        });
+      });
     },
-    toRegisterPage () {
-      this.$router.push({ name: 'register' })
+    toRegisterPage() {
+      this.$router.push({ name: "register" });
     }
   }
-}
+};
 </script>
 <style scoped lang="scss">
 @import "./index.scss";
