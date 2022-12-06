@@ -17,7 +17,7 @@
     "iview": "^3.5.4",
     "js-cookie": "^2.2.1",
     "marked": "^0.8.0",
-    "qs": "^6.9.1",
+    "qs": "^6.9.7",
     "serve": "^11.3.2",
     "simple-m-editor": "^0.4.3",
     "socket.io-client": "^2.3.0",
